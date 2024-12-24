@@ -1,62 +1,49 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         App app = new App();
         app.run();
-
     }
 }
 
 class App {
-    ArrayList<WiseSaying> list = new ArrayList<>();
-    int lastId = 0;
-    String content = "";
-    String author = "";
+    Scanner sc = new Scanner(System.in);
+    Map<Integer, WiseSaying> sayings = new HashMap<>();
+    
 
     public void run() {
-        Scanner sc = new Scanner(System.in);
-
         System.out.println("== 명언 앱 ==");
 
-        while(true) {
+        Loop1:while (true) {
             System.out.print("명령) ");
-            String command = sc.nextLine();
+            String command = sc.nextLine().trim();
+            
+            boolean isDeleteOrUpdate = command.startsWith("삭제") || command.startsWith("수정");
+            
+            if (isDeleteOrUpdate) {
+                System.out.println("삭제 수정 처리");
+                continue;
+            }
 
-            if (command.equals("종료")) {
-                break;
-
-            } else if (command.equals("등록")) {
-                System.out.print("명언 : ");
-                content = sc.nextLine();
-
-                System.out.print("작가 : ");
-                author = sc.nextLine();
-
-                add(++lastId, content, author);
-
-            }else if(command.equals("삭제")) {
-                // System.out.println("%d번 명언이 삭제되었습니다.".formatted(list[i].idx));
-            } else if (command.equals("목록")) {
-                System.out.println("번호 / 작가 / 명언");
-                System.out.println("-------------------------------");
-
-                for (WiseSaying l : list) {
-                    System.out.println(" %d / %s / %s".formatted(l.id, l.author, l.content));
-                }
-
-            } else {
-                System.out.println("잘못된 입력입니다.");
-
+            switch (command) {
+                case "등록":
+                    //
+                    break;
+                case "목록":
+                    //
+                    break;
+                case "종료":
+                    //
+                    break Loop1;
+                default:
+                    System.out.println("알 수 없는 명령어입니다. 다시 입력해주세요.");
+                    break;
             }
         }
-
-    }
-
-    public void add(int lastId, String content, String author) {
-        list.add(new WiseSaying(lastId, content, author));
-        System.out.println("%d번 명언이 등록되었습니다.".formatted(lastId));
     }
 }
 
