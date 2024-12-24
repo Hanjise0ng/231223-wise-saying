@@ -10,11 +10,16 @@ public class Main {
 }
 
 class App {
+    ArrayList<WiseSaying> list = new ArrayList<>();
+    int lastId = 0;
+    String content = "";
+    String author = "";
+
     public void run() {
-        ArrayList<WiseSaying> list = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
+
         System.out.println("== 명언 앱 ==");
-        int lastNo = 1;
+
         while(true) {
             System.out.print("명령) ");
             String command = sc.nextLine();
@@ -24,21 +29,21 @@ class App {
 
             } else if (command.equals("등록")) {
                 System.out.print("명언 : ");
-                String sentence = sc.nextLine();
+                content = sc.nextLine();
 
                 System.out.print("작가 : ");
-                String author = sc.nextLine();
-                WiseSaying w = new WiseSaying(lastNo, sentence, author);
-                list.add(w);
-                System.out.println( lastNo + "번 명언이 등록되었습니다.");
-                lastNo++;
+                author = sc.nextLine();
 
+                add(++lastId, content, author);
+
+            }else if(command.equals("삭제")) {
+                // System.out.println("%d번 명언이 삭제되었습니다.".formatted(list[i].idx));
             } else if (command.equals("목록")) {
                 System.out.println("번호 / 작가 / 명언");
                 System.out.println("-------------------------------");
 
                 for (WiseSaying l : list) {
-                    System.out.println(l.idx + " / " + l.author + " / " + l.sentence);
+                    System.out.println(" %d / %s / %s".formatted(l.id, l.author, l.content));
                 }
 
             } else {
@@ -48,16 +53,21 @@ class App {
         }
 
     }
+
+    public void add(int lastId, String content, String author) {
+        list.add(new WiseSaying(lastId, content, author));
+        System.out.println("%d번 명언이 등록되었습니다.".formatted(lastId));
+    }
 }
 
 class WiseSaying {
-    int idx;
-    String sentence;
+    int id;
+    String content;
     String author;
 
-    WiseSaying(int idx, String sentence, String author) {
-        this.idx = idx;
-        this.sentence = sentence;
+    WiseSaying(int id, String content, String author) {
+        this.id = id;
+        this.content = content;
         this.author = author;
     }
 
