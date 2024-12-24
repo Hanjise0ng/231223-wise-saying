@@ -14,25 +14,26 @@ class App {
         ArrayList<WiseSaying> list = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
         System.out.println("== 명언 앱 ==");
-        int idx = 1;
+        int lastNo = 1;
         while(true) {
             System.out.print("명령) ");
-            String options = sc.nextLine();
+            String command = sc.nextLine();
 
-            if (options.equals("종료")) {
+            if (command.equals("종료")) {
                 break;
 
-            } else if (options.equals("등록")) {
+            } else if (command.equals("등록")) {
                 System.out.print("명언 : ");
                 String sentence = sc.nextLine();
 
                 System.out.print("작가 : ");
                 String author = sc.nextLine();
-                WiseSaying w = new WiseSaying(idx, sentence, author);
+                WiseSaying w = new WiseSaying(lastNo, sentence, author);
                 list.add(w);
-                System.out.println( idx++ + "번 명언이 등록되었습니다.");
+                System.out.println( lastNo + "번 명언이 등록되었습니다.");
+                lastNo++;
 
-            } else if (options.equals("목록")) {
+            } else if (command.equals("목록")) {
                 System.out.println("번호 / 작가 / 명언");
                 System.out.println("-------------------------------");
 
